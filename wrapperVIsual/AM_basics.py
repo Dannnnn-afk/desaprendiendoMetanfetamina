@@ -3,7 +3,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-class Objective_function:
+class objectiveFunction:
     def __init__(self, dim, lim_inf, lim_sup):
         self.d = dim
         self.lb = lim_inf
