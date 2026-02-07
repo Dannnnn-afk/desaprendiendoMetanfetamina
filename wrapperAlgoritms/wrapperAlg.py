@@ -65,19 +65,27 @@ with many local minima. The plot shows the two-dimensional
 form of the function.
 """
 class schwefel(objectiveFunction):
-    def function(self, x1,x2):
-        
-        return 418.9829*2 - x1 * math.sin( math.sqrt( abs( x1 ))) - x2 * math.sin(math.sqrt(abs(x2)))
+    def function(self, x):
+        x = np.array(x)
+        n = x.shape[0]
+        return 418.9829 * n - np.sum(x * np.sin(np.sqrt(np.abs(x))))
         """_summary_ Hay q hacer mas dimensiones
         Args:
-            x1 (np.linespace): nomber,number
-            x2 (np.linespace): nomber,number
+            x (np.linespace): vector de números
         Returns:
             : _description_
         """
 class RotatedHyperEllipsoid(objectiveFunction):
-    def function(self, x1,x2):
-         return  (2*(x1*x1)+(x2*x2))
+    def function(self, x):
+        d = len(x)
+        mat = np.tile(x, (d, 1))  # repetir xx por filas
+        matlow = mat.copy()
+        matlow[np.triu_indices(d, k=1)] = 0  # anular triángulo superior
+
+        inner = np.sum(matlow ** 2, axis=1)
+        outer = np.sum(inner)
+        y = outer
+        return y
      
 """The global minimum is inside a long, narrow, 
 parabolic-shaped flat valley. To find the valley is trivial. 
@@ -156,21 +164,70 @@ class Trid(objectiveFunction):
         return suma1 - suma2
 class Zakharov(objectiveFunction):
     def function(self, x):
-        pass
+        x = np.array(x)
+        n = x.shape[0]
+        suma1 = 0
+        suma2 = 0
+        for i in range(n):
+            suma1 += x[i]**2
+            suma2 += 0.5*(i+1)*x[i]
+        return suma1 + suma2**2 + suma2**4
+    
 class dixonPrice(objectiveFunction):
     def function(self, x):
-        pass
+        x1 = x[0]
+        d = len(x)
+        term1 = (x1 - 1) ** 2
+
+        total = 0.0
+        for ii in range(2, d + 1):
+            xi = x[ii - 1]
+            xold = x[ii - 2]
+            new = ii * (2 * xi ** 2 - xold) ** 2
+            total += new
+
+            y = term1 + total
+        return y
+        
+        
 class michalewicz(objectiveFunction):
     def function(self, x):
-        pass
+        constant = 10
+        x = np.array(x)
+        n = x.shape[0]
+        suma = 0
+        for i in range(n):
+            suma += math.sin(x[i]) * (math.sin((i+1)*x[i]**2/constant))**20
+        return -suma
+
 class permbd(objectiveFunction):
     def function(self, x):
-        pass
+        x = np.array(x)
+        n = x.shape[0]
+        b = 0.5
+        suma = 0.0
+        for i in range(1, n + 1):
+            inner = 0.0
+            for j in range(1, n + 1):
+                inner += (j**i + b) * ((x[j - 1] / j) ** i - 1)
+            suma += inner ** 2
+        return suma
 class styblinski(objectiveFunction):
     def function(self, x):
-        pass
+        x = np.array(x)
+        n = x.shape[0]
+        suma = 0
+        for i in range(n):
+            suma += x[i]**4 - 16*x[i]**2 + 5*x[i]
+        return suma/2
+        
+        
 class bochanchevski(objectiveFunction):
     def function(self, x):
-        pass
-        self.dim = dim
+        x = np.array(x)
+        x1 = x[0]
+        x2 = x[1]
+        # Bohachevsky function 1
+        return x1**2 + 2 * x2**2 - 0.3 * np.cos(3 * np.pi * x1) - 0.4 * np.cos(4 * np.pi * x2) + 0.7
+            
 
