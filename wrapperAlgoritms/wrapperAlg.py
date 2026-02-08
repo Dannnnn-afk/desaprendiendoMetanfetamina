@@ -34,8 +34,10 @@ function used as a performance test problem for optimization algorithms.
 It is a typical example of non-linear multimodal function
 """
 class Rastrigin(objectiveFunction):
-    def function(self, x1,x2):
-       return 20 + x1**2 - 10*math.cos(2*math.pi*x1) + x2**2 - 10*math.cos(2*math.pi*x2)
+    def function(self, x):
+        x = np.array(x)
+        n = x.shape[0]
+        return 10 * n + np.sum(x**2 - 10 * np.cos(2 * np.pi * x))
 """
  La función de Levy es una función de prueba de benchmark 
  utilizada para evaluar algoritmos de optimización.
@@ -220,8 +222,7 @@ class styblinski(objectiveFunction):
         for i in range(n):
             suma += x[i]**4 - 16*x[i]**2 + 5*x[i]
         return suma/2
-        
-        
+           
 class bochanchevski(objectiveFunction):
     def function(self, x):
         x = np.array(x)
