@@ -1,3 +1,5 @@
+"""Colección de funciones objetivo de prueba para metaheurísticas."""
+
 #VAMO a iniciar a wrapperAlg.py donde pondremos las librerias para calcular cosos de los algoritmos metahudisticos
 #LIbrerias/}
 from wrapperVIsual import *
@@ -7,20 +9,40 @@ import numpy as np
 from wrapperVIsual.AM_basics import objectiveFunction
 
 class Spehere(objectiveFunction) :
+    """Función Sphere.
+
+    Suma de cuadrados de las variables. Es convexa y tiene un único mínimo global en
+    el origen.
+    """
     def function(self, x):
+        """Evalúa la función Sphere en el punto dado.
+
+        Args:
+            x (array-like): Vector de entrada de tamaño $d$.
+
+        Returns:
+            float: Valor de la función en $x$.
+        """
         suma = 0
         for e in x:
             suma += e**2
         return suma
-"""
-La función de Ackley se utiliza ampliamente para probar algoritmos de optimización. En su 
-forma bidimensional, como se muestra en el gráfico anterior, se caracteriza por una 
-región exterior casi plana y un gran agujero en el centro. Esta función presenta el 
-riesgo de que los algoritmos de optimización, en particular los de escalada, queden
-atrapados en uno de sus numerosos mínimos locales. es como arena movediza
-"""       
 class Ackley(objectiveFunction):
+    """Función de Ackley usada para probar algoritmos de optimización.
+
+    En 2D se caracteriza por una región exterior casi plana y un gran agujero en el
+    centro. Presenta el riesgo de que los algoritmos queden atrapados en uno de sus
+    numerosos mínimos locales (como arena movediza).
+    """
     def function(self, x):
+        """Evalúa la función de Ackley en el punto dado.
+
+        Args:
+            x (array-like): Vector de entrada de tamaño $d$.
+
+        Returns:
+            float: Valor de la función en $x$.
+        """
         n = x.shape[0]
         suma1 = 0
         suma2 = 0
@@ -28,31 +50,38 @@ class Ackley(objectiveFunction):
             suma1 += x[i]**2
             suma2 += math.cos(2*math.pi*x[i])
             return -20*math.exp(-0.2*math.sqrt(suma1/n)) - math.exp(suma2/n) + 20 + math.e
-"""
-In mathematical optimization, the Rastrigin function is a non-convex 
-function used as a performance test problem for optimization algorithms.
-It is a typical example of non-linear multimodal function
-"""
 class Rastrigin(objectiveFunction):
+    """Función Rastrigin: prueba no convexa y multimodal.
+
+    Es un ejemplo típico de función no lineal con muchos mínimos locales, usada para
+    evaluar desempeño de algoritmos de optimización.
+    """
     def function(self, x):
+        """Evalúa la función de Rastrigin en el punto dado.
+
+        Args:
+            x (array-like): Vector de entrada de tamaño $d$.
+
+        Returns:
+            float: Valor de la función en $x$.
+        """
         x = np.array(x)
         n = x.shape[0]
         return 10 * n + np.sum(x**2 - 10 * np.cos(2 * np.pi * x))
-"""
- La función de Levy es una función de prueba de benchmark 
- utilizada para evaluar algoritmos de optimización.
- No es un "algoritmo", sino una función objetivo compleja con 
- múltiples mínimos locales.
-
-Características:
-
-Multimodal: tiene muchos mínimos locales
-No convexa: difícil de optimizar
-Mínimo global: f(1, 1, ..., 1) = 0
-"""  
-   
 class Levy(objectiveFunction):
+    """Función Levy: benchmark con múltiples mínimos locales.
+
+    Multimodal y no convexa. Mínimo global: $f(1, 1, ..., 1) = 0$.
+    """
     def function(self, x):
+        """Evalúa la función de Levy en el punto dado.
+
+        Args:
+            x (array-like): Vector de entrada de tamaño $d$.
+
+        Returns:
+            float: Valor de la función en $x$.
+        """
         x = np.array(x)
         n = x.shape[0]
         w = 1 + (x - 1) / 4
@@ -62,23 +91,37 @@ class Levy(objectiveFunction):
         term3 = (w[-1] - 1)**2 * (1 + np.sin(2 * np.pi * w[-1])**2)
         
         return term1 + term2 + term3
-"""The Schwefel function is complex,
-with many local minima. The plot shows the two-dimensional 
-form of the function.
-"""
 class schwefel(objectiveFunction):
+    """Función Schwefel: compleja y con muchos mínimos locales.
+
+    La visualización en 2D muestra un paisaje con numerosos valles locales.
+    """
     def function(self, x):
+        """Evalúa la función Schwefel en el punto dado.
+
+        Args:
+            x (array-like): Vector de entrada de tamaño $d$.
+
+        Returns:
+            float: Valor de la función en $x$.
+        """
         x = np.array(x)
         n = x.shape[0]
         return 418.9829 * n - np.sum(x * np.sin(np.sqrt(np.abs(x))))
-        """_summary_ Hay q hacer mas dimensiones
-        Args:
-            x (np.linespace): vector de números
-        Returns:
-            : _description_
-        """
 class RotatedHyperEllipsoid(objectiveFunction):
+    """Función Rotated Hyper-Ellipsoid.
+
+    Construye una suma acumulada de cuadrados que genera un valle alargado.
+    """
     def function(self, x):
+        """Evalúa la función Rotated Hyper-Ellipsoid en el punto dado.
+
+        Args:
+            x (array-like): Vector de entrada de tamaño $d$.
+
+        Returns:
+            float: Valor de la función en $x$.
+        """
         d = len(x)
         mat = np.tile(x, (d, 1))  # repetir xx por filas
         matlow = mat.copy()
@@ -89,30 +132,38 @@ class RotatedHyperEllipsoid(objectiveFunction):
         y = outer
         return y
      
-"""The global minimum is inside a long, narrow, 
-parabolic-shaped flat valley. To find the valley is trivial. 
-To converge to the global minimum, however, is difficult.
-
-Returns:
-_type_: _description_
-"""
 class Rosenbrock(objectiveFunction):
+    """Función Rosenbrock: valle estrecho con mínimo global difícil.
+
+    El mínimo global está dentro de un valle largo y angosto con forma parabólica.
+    Encontrar el valle es sencillo, pero converger al mínimo global es difícil.
+    """
     def function(self, x):
+        """Evalúa la función Rosenbrock en el punto dado.
+
+        Args:
+            x (array-like): Vector de entrada de tamaño $d$.
+
+        Returns:
+            float: Valor de la función en $x$.
+        """
         x = np.array(x)
         suma = 0
         n = x.shape[0]
         for i in range(n-1):
             suma += 100*(x[i+1]-x[i]**2)**2 + (x[i]-1)**2
         return suma
-"""The Griewank function has many widespread local minima, 
-which are regularly distributed. 
-The complexity is shown in the zoomed-in plots.
-
-Returns:
-_type_: _description_
-"""
 class Griewank(objectiveFunction):
+    """Función Griewank: muchos mínimos locales distribuidos regularmente."""
     def function(self, x):
+        """Evalúa la función Griewank en el punto dado.
+
+        Args:
+            x (array-like): Vector de entrada de tamaño $d$.
+
+        Returns:
+            float: Valor de la función en $x$.
+        """
         x = np.array(x)
         n = x.shape[0]
         suma = 0
@@ -124,7 +175,19 @@ class Griewank(objectiveFunction):
     
     #No sure about this one
 class PermOBD(objectiveFunction):
+    """Función Perm OBD (variante de Perm).
+
+    Útil para pruebas con múltiples mínimos locales.
+    """
     def function(self, x):
+        """Evalúa la función Perm OBD en el punto dado.
+
+        Args:
+            x (array-like): Vector de entrada de tamaño $d$.
+
+        Returns:
+            float: Valor de la función en $x$.
+        """
         x = np.array(x)
         n = x.shape[0]
         suma = 0
@@ -136,7 +199,16 @@ class PermOBD(objectiveFunction):
         return suma
 
 class difPotencias(objectiveFunction)  :
+    """Función de potencias con exponente creciente por dimensión."""
     def function(self, x):
+        """Evalúa la función de potencias en el punto dado.
+
+        Args:
+            x (array-like): Vector de entrada de tamaño $d$.
+
+        Returns:
+            float: Valor de la función en $x$.
+        """
         x = np.array(x)
         n = x.shape[0]
         suma = 0
@@ -144,7 +216,16 @@ class difPotencias(objectiveFunction)  :
             suma += abs(x[i])**(i+2)
         return suma
 class SumaCuadrados(objectiveFunction):
+    """Suma de cuadrados ponderada por el índice de dimensión."""
     def function(self, x):
+        """Evalúa la suma de cuadrados ponderada en el punto dado.
+
+        Args:
+            x (array-like): Vector de entrada de tamaño $d$.
+
+        Returns:
+            float: Valor de la función en $x$.
+        """
         x = np.array(x)
         n = x.shape[0]
         suma = 0
@@ -154,7 +235,16 @@ class SumaCuadrados(objectiveFunction):
     
 
 class Trid(objectiveFunction):
+    """Función Trid usada para pruebas de optimización."""
     def function(self, x):
+        """Evalúa la función Trid en el punto dado.
+
+        Args:
+            x (array-like): Vector de entrada de tamaño $d$.
+
+        Returns:
+            float: Valor de la función en $x$.
+        """
         x = np.array(x)
         n = x.shape[0]
         suma1 = 0
@@ -165,7 +255,16 @@ class Trid(objectiveFunction):
                 suma2 += x[i]*x[i+1]
         return suma1 - suma2
 class Zakharov(objectiveFunction):
+    """Función Zakharov con términos cuadráticos y cuárticos."""
     def function(self, x):
+        """Evalúa la función Zakharov en el punto dado.
+
+        Args:
+            x (array-like): Vector de entrada de tamaño $d$.
+
+        Returns:
+            float: Valor de la función en $x$.
+        """
         x = np.array(x)
         n = x.shape[0]
         suma1 = 0
@@ -176,7 +275,16 @@ class Zakharov(objectiveFunction):
         return suma1 + suma2**2 + suma2**4
     
 class dixonPrice(objectiveFunction):
+    """Función Dixon-Price para evaluación de algoritmos."""
     def function(self, x):
+        """Evalúa la función Dixon-Price en el punto dado.
+
+        Args:
+            x (array-like): Vector de entrada de tamaño $d$.
+
+        Returns:
+            float: Valor de la función en $x$.
+        """
         x1 = x[0]
         d = len(x)
         term1 = (x1 - 1) ** 2
@@ -193,7 +301,19 @@ class dixonPrice(objectiveFunction):
         
         
 class michalewicz(objectiveFunction):
+    """Función Michalewicz con parámetro $m=10$.
+
+    Multimodal y con picos agudos, suele ser difícil de optimizar.
+    """
     def function(self, x):
+        """Evalúa la función Michalewicz en el punto dado.
+
+        Args:
+            x (array-like): Vector de entrada de tamaño $d$.
+
+        Returns:
+            float: Valor de la función en $x$.
+        """
         constant = 10
         x = np.array(x)
         n = x.shape[0]
@@ -203,7 +323,16 @@ class michalewicz(objectiveFunction):
         return -suma
 
 class permbd(objectiveFunction):
+    """Función Perm BD con múltiples mínimos locales."""
     def function(self, x):
+        """Evalúa la función Perm BD en el punto dado.
+
+        Args:
+            x (array-like): Vector de entrada de tamaño $d$.
+
+        Returns:
+            float: Valor de la función en $x$.
+        """
         x = np.array(x)
         n = x.shape[0]
         b = 0.5
@@ -215,7 +344,16 @@ class permbd(objectiveFunction):
             suma += inner ** 2
         return suma
 class styblinski(objectiveFunction):
+    """Función Styblinski–Tang: no convexa y multimodal."""
     def function(self, x):
+        """Evalúa la función Styblinski–Tang en el punto dado.
+
+        Args:
+            x (array-like): Vector de entrada de tamaño $d$.
+
+        Returns:
+            float: Valor de la función en $x$.
+        """
         x = np.array(x)
         n = x.shape[0]
         suma = 0
@@ -224,7 +362,16 @@ class styblinski(objectiveFunction):
         return suma/2
            
 class bochanchevski(objectiveFunction):
+    """Función Bohachevsky (variante 1) con términos trigonométricos."""
     def function(self, x):
+        """Evalúa la función Bohachevsky en el punto dado.
+
+        Args:
+            x (array-like): Vector de entrada de tamaño 2.
+
+        Returns:
+            float: Valor de la función en $x$.
+        """
         x = np.array(x)
         x1 = x[0]
         x2 = x[1]
