@@ -18,10 +18,10 @@ class Spehere(objectiveFunction) :
         """Evalúa la función Sphere en el punto dado.
 
         Args:
-            x (array-like): Vector de entrada de tamaño $d$.
+            x (array-like): Vector de entrada de tamaño d.
 
         Returns:
-            float: Valor de la función en $x$.
+            float: Valor de la función en  x .
         """
         suma = 0
         for e in x:
@@ -38,10 +38,10 @@ class Ackley(objectiveFunction):
         """Evalúa la función de Ackley en el punto dado.
 
         Args:
-            x (array-like): Vector de entrada de tamaño $d$.
+            x (array-like): Vector de entrada de tamaño  d .
 
         Returns:
-            float: Valor de la función en $x$.
+            float: Valor de la función en  x .
         """
         n = x.shape[0]
         suma1 = 0
@@ -60,10 +60,10 @@ class Rastrigin(objectiveFunction):
         """Evalúa la función de Rastrigin en el punto dado.
 
         Args:
-            x (array-like): Vector de entrada de tamaño $d$.
+            x (array-like): Vector de entrada de tamaño  d .
 
         Returns:
-            float: Valor de la función en $x$.
+            float: Valor de la función en  x .
         """
         x = np.array(x)
         n = x.shape[0]
@@ -71,16 +71,16 @@ class Rastrigin(objectiveFunction):
 class Levy(objectiveFunction):
     """Función Levy: benchmark con múltiples mínimos locales.
 
-    Multimodal y no convexa. Mínimo global: $f(1, 1, ..., 1) = 0$.
+    Multimodal y no convexa. Mínimo global:  f(1, 1, ..., 1) = 0 .
     """
     def function(self, x):
         """Evalúa la función de Levy en el punto dado.
 
         Args:
-            x (array-like): Vector de entrada de tamaño $d$.
+            x (array-like): Vector de entrada de tamaño  d .
 
         Returns:
-            float: Valor de la función en $x$.
+            float: Valor de la función en  x .
         """
         x = np.array(x)
         n = x.shape[0]
@@ -100,10 +100,10 @@ class schwefel(objectiveFunction):
         """Evalúa la función Schwefel en el punto dado.
 
         Args:
-            x (array-like): Vector de entrada de tamaño $d$.
+            x (array-like): Vector de entrada de tamaño  d .
 
         Returns:
-            float: Valor de la función en $x$.
+            float: Valor de la función en  x .
         """
         x = np.array(x)
         n = x.shape[0]
@@ -117,10 +117,10 @@ class RotatedHyperEllipsoid(objectiveFunction):
         """Evalúa la función Rotated Hyper-Ellipsoid en el punto dado.
 
         Args:
-            x (array-like): Vector de entrada de tamaño $d$.
+            x (array-like): Vector de entrada de tamaño  d .
 
         Returns:
-            float: Valor de la función en $x$.
+            float: Valor de la función en  x .
         """
         d = len(x)
         mat = np.tile(x, (d, 1))  # repetir xx por filas
@@ -142,10 +142,10 @@ class Rosenbrock(objectiveFunction):
         """Evalúa la función Rosenbrock en el punto dado.
 
         Args:
-            x (array-like): Vector de entrada de tamaño $d$.
+            x (array-like): Vector de entrada de tamaño  d .
 
         Returns:
-            float: Valor de la función en $x$.
+            float: Valor de la función en  x .
         """
         x = np.array(x)
         suma = 0
@@ -159,10 +159,10 @@ class Griewank(objectiveFunction):
         """Evalúa la función Griewank en el punto dado.
 
         Args:
-            x (array-like): Vector de entrada de tamaño $d$.
+            x (array-like): Vector de entrada de tamaño  d .
 
         Returns:
-            float: Valor de la función en $x$.
+            float: Valor de la función en  x .
         """
         x = np.array(x)
         n = x.shape[0]
@@ -183,10 +183,10 @@ class PermOBD(objectiveFunction):
         """Evalúa la función Perm OBD en el punto dado.
 
         Args:
-            x (array-like): Vector de entrada de tamaño $d$.
+            x (array-like): Vector de entrada de tamaño  d .
 
         Returns:
-            float: Valor de la función en $x$.
+            float: Valor de la función en  x .
         """
         x = np.array(x)
         n = x.shape[0]
@@ -204,10 +204,10 @@ class difPotencias(objectiveFunction)  :
         """Evalúa la función de potencias en el punto dado.
 
         Args:
-            x (array-like): Vector de entrada de tamaño $d$.
+            x (array-like): Vector de entrada de tamaño  d .
 
         Returns:
-            float: Valor de la función en $x$.
+            float: Valor de la función en  x .
         """
         x = np.array(x)
         n = x.shape[0]
@@ -221,10 +221,10 @@ class SumaCuadrados(objectiveFunction):
         """Evalúa la suma de cuadrados ponderada en el punto dado.
 
         Args:
-            x (array-like): Vector de entrada de tamaño $d$.
+            x (array-like): Vector de entrada de tamaño  d .
 
         Returns:
-            float: Valor de la función en $x$.
+            float: Valor de la función en  x .
         """
         x = np.array(x)
         n = x.shape[0]
@@ -240,10 +240,10 @@ class Trid(objectiveFunction):
         """Evalúa la función Trid en el punto dado.
 
         Args:
-            x (array-like): Vector de entrada de tamaño $d$.
+            x (array-like): Vector de entrada de tamaño  d .
 
         Returns:
-            float: Valor de la función en $x$.
+            float: Valor de la función en  x .
         """
         x = np.array(x)
         n = x.shape[0]
@@ -260,10 +260,10 @@ class Zakharov(objectiveFunction):
         """Evalúa la función Zakharov en el punto dado.
 
         Args:
-            x (array-like): Vector de entrada de tamaño $d$.
+            x (array-like): Vector de entrada de tamaño  d .
 
         Returns:
-            float: Valor de la función en $x$.
+            float: Valor de la función en  x .
         """
         x = np.array(x)
         n = x.shape[0]
@@ -280,10 +280,10 @@ class dixonPrice(objectiveFunction):
         """Evalúa la función Dixon-Price en el punto dado.
 
         Args:
-            x (array-like): Vector de entrada de tamaño $d$.
+            x (array-like): Vector de entrada de tamaño  d .
 
         Returns:
-            float: Valor de la función en $x$.
+            float: Valor de la función en  x .
         """
         x1 = x[0]
         d = len(x)
@@ -301,7 +301,7 @@ class dixonPrice(objectiveFunction):
         
         
 class michalewicz(objectiveFunction):
-    """Función Michalewicz con parámetro $m=10$.
+    """Función Michalewicz con parámetro  m=10 .
 
     Multimodal y con picos agudos, suele ser difícil de optimizar.
     """
@@ -309,10 +309,10 @@ class michalewicz(objectiveFunction):
         """Evalúa la función Michalewicz en el punto dado.
 
         Args:
-            x (array-like): Vector de entrada de tamaño $d$.
+            x (array-like): Vector de entrada de tamaño  d .
 
         Returns:
-            float: Valor de la función en $x$.
+            float: Valor de la función en  x .
         """
         constant = 10
         x = np.array(x)
@@ -328,10 +328,10 @@ class permbd(objectiveFunction):
         """Evalúa la función Perm BD en el punto dado.
 
         Args:
-            x (array-like): Vector de entrada de tamaño $d$.
+            x (array-like): Vector de entrada de tamaño  d .
 
         Returns:
-            float: Valor de la función en $x$.
+            float: Valor de la función en  x .
         """
         x = np.array(x)
         n = x.shape[0]
@@ -349,10 +349,10 @@ class styblinski(objectiveFunction):
         """Evalúa la función Styblinski–Tang en el punto dado.
 
         Args:
-            x (array-like): Vector de entrada de tamaño $d$.
+            x (array-like): Vector de entrada de tamaño  d .
 
         Returns:
-            float: Valor de la función en $x$.
+            float: Valor de la función en  x .
         """
         x = np.array(x)
         n = x.shape[0]
@@ -370,7 +370,7 @@ class bochanchevski(objectiveFunction):
             x (array-like): Vector de entrada de tamaño 2.
 
         Returns:
-            float: Valor de la función en $x$.
+            float: Valor de la función en  x .
         """
         x = np.array(x)
         x1 = x[0]
