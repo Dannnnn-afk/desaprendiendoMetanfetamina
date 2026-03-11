@@ -16,9 +16,9 @@ class objectiveFunction:
     def function(self, x):
         pass
     
-    def __calculate_draw(self,resolution=200):
-        #Revisar si ya se calculo antes
-        if not self.cal:
+    def __calculate_draw(self, resolution=200):
+        #Revisar si ya se calculo antes o si cambió la resolución
+        if (not self.cal) or (getattr(self, 'res', None) != resolution):
            #Revisar si se tiene la dimension adecuada
            if self.d != 2:
                raise('No podemos dibujar la funcion ya que no tiene 2 dimensiones')
@@ -37,11 +37,12 @@ class objectiveFunction:
            self.yy = yy
            self.zz = zz
            self.cal = True
+           self.res = resolution
            
            
-    def draw2d(self, X=None, name=None):
+    def draw2d(self, X=None, name=None, resolution=200):
         #Calcular grafico
-        self.__calculate_draw()
+        self.__calculate_draw(resolution)
         
         #dibujar
         fig = plt.figure(figsize=(9,9))
@@ -59,9 +60,9 @@ class objectiveFunction:
             
         return fig
 
-    def draw3d(self, X= None, name=None):
+    def draw3d(self, X= None, name=None, resolution=200):
         #calcular grafico
-        self.__calculate_draw()
+        self.__calculate_draw(resolution)
         
         #Dibujar
         fig = plt.figure(figsize=(9,9))

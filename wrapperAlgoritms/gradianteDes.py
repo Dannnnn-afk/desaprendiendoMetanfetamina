@@ -25,6 +25,7 @@ plt.plot([-1,1], [beta[0,0] - beta[0,1],
 
 plt.plot(X,Y, '.r') #.r puntos rojos
 plt.title('Gradiente descendente')
+#Modificar esto para regresion lineal multiple. 
 
 
 #segundo metodo : pseudoinversa

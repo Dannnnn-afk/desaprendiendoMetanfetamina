@@ -43,13 +43,11 @@ class Ackley(objectiveFunction):
         Returns:
             float: Valor de la función en  x .
         """
-        n = x.shape[0]
-        suma1 = 0
-        suma2 = 0
-        for i in range(n):
-            suma1 += x[i]**2
-            suma2 += math.cos(2*math.pi*x[i])
-            return -20*math.exp(-0.2*math.sqrt(suma1/n)) - math.exp(suma2/n) + 20 + math.e
+        x = np.asarray(x, dtype=float).ravel()
+        n = x.size
+        suma1 = np.sum(x**2)
+        suma2 = np.sum(np.cos(2 * np.pi * x))
+        return float(-20*np.exp(-0.2*np.sqrt(suma1/n)) - np.exp(suma2/n) + 20 + math.e)
 class Rastrigin(objectiveFunction):
     """Función Rastrigin: prueba no convexa y multimodal.
 
